@@ -1,5 +1,7 @@
 from enum import Enum
-
+from htmlnode import HTMLNode
+from textnode import text_node_to_html_node
+from inline_markdown import text_to_textnodes
 
 class BlockType(Enum):
     PARAGRAPH = "paragraph"
@@ -51,11 +53,36 @@ def block_to_block_type(block):
         return BlockType.OLIST
     return BlockType.PARAGRAPH
 
+def type_block_to_node(block_text ,block_type):
+    if block_type == BlockType.HEADING:
+        number = 0
+        for i in block_text:
+            if i == "#":
+                number += 1
+        return HTMLNode(f"h{number}" ,block_text)
+    if block_type == BlockType.QUOTE:
+        return HTMLNode("blockquote", block_text)
+    if block_type == BlockType.CODE:
+        return HTMLNode("code", block_text)
+    if block_type == BlockType.ULIST:
+        return HTMLNode("ul", block_text)
+    if block_type == BlockType.OLIST:
+        return HTMLNode("li", block_text)
+    return HTMLNode("p", block_text)
+
+def text_to_children(text):
+    textnodes = text_to_textnodes(text)
+    # print(textnodes)
+    test = []
+    for t in textnodes:
+        test.append(text_node_to_html_node(t))
+    return test
 
 def markdown_to_html_node(markdown):
     blocks = markdown_to_blocks(markdown)
     print("BLOCKS!!: ", blocks)
     for block in blocks:
-        print("Block: ", block)
         block_type = block_to_block_type(block)
-        print("Type: ",block_type)
+        createhtml = type_block_to_node(block, block_type)
+        child_nodes = text_to_children(createhtml.value)
+        print("child nodes: ", child_nodes)
