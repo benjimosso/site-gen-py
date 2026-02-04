@@ -17,11 +17,17 @@ This is **bolded** paragraph
 text in a p
 tag here
 
+
+
 This is another paragraph with _italic_ text and `code` here
 
 """
-    result = markdown_to_html_node(md2)
-    print(result)
+
+    block = "- list\n- items"
+    block2 = "1. list\n2. This is **bolded** paragraph"
+    code = "```\ncode\n```"
+    result = markdown_to_html_node(code)
+    # print(result)
 
 if __name__ == "__main__":
     main()
