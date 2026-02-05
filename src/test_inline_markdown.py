@@ -3,7 +3,8 @@ from inline_markdown import (
     split_nodes_delimiter,
     extract_markdown_links,
     extract_markdown_images, split_nodes_image, split_nodes_link,
-    text_to_textnodes
+    text_to_textnodes, 
+    extract_title
 )
 
 from textnode import TextNode, TextType
@@ -199,6 +200,13 @@ class TestInlineMarkdown(unittest.TestCase):
             TextNode(" and a ", TextType.TEXT),
             TextNode("link", TextType.LINK, "https://boot.dev"),
             ],
+            result
+        )
+    def test_heading(self):
+        markdown = "# TEST"
+        result = extract_title(markdown)
+        self.assertEqual(
+            "TEST",
             result
         )
 

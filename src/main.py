@@ -1,33 +1,24 @@
-from inline_markdown import split_nodes_delimiter, split_nodes_image, split_nodes_link, text_to_textnodes
-from textnode import TextNode, TextType, text_node_to_html_node
-from block_markdown import markdown_to_blocks, block_to_block_type, markdown_to_html_node
-import re
+import os, shutil
+
+from copystatic import copy_files_recursive
+from generate_page import generate_page
+
+
+
+dir_path_static = "./static"
+dir_path_public = "./public"
+indexmd = "./content/index.md"
+
 
 def main():
-    md = """
-This is **bolded** paragraph
-text in a p
-tag here
+    # print("Deleting public directory...")
+    # if os.path.exists(dir_path_public):
+    #     shutil.rmtree(dir_path_public)
 
-This is another paragraph with _italic_ text and `code` here
-
-"""
-    md2 = """
-This is **bolded** paragraph
-text in a p
-tag here
-
-
-
-This is another paragraph with _italic_ text and `code` here
-
-"""
-
-    block = "- list\n- items"
-    block2 = "1. list\n2. This is **bolded** paragraph"
-    code = "```\ncode\n```"
-    result = markdown_to_html_node(code)
-    # print(result)
+    # print("Copying static files to public directory...")
+    # copy_files_recursive(dir_path_static, dir_path_public)
+    
+    generate_page(indexmd, "./template.html", "./public/index.html")
 
 if __name__ == "__main__":
     main()

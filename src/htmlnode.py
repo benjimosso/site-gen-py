@@ -45,8 +45,8 @@ class ParentNode(HTMLNode):
             raise ValueError("No Children")
         childrens = ""
         for ch in self.children:
-            print(ch)
             childrens = childrens + ch.to_html()
-        # print("Final Result Parent: ", f"<{self.tag}{self.props_to_html()}>{childrens}</{self.tag}>")
-        # print("Childrens passed: ", self.children)
         return f"<{self.tag}{self.props_to_html()}>{childrens}</{self.tag}>"
+    
+    def __repr__(self):
+        return f"ParentNode({self.tag}, children: {self.children}, {self.props})"
