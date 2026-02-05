@@ -99,14 +99,14 @@ def extract_markdown_links(text):
     matches = re.findall(pattern, text)
     return matches
 
-def extract_title(markdown):
-    markdown = markdown.strip()
-    if not markdown.startswith("#"):
-        raise Exception("There is no title.")  
-    split_nodes = []
-    sections = markdown.strip().split("\n")
-    result = sections[0].replace("#", "").strip()
-    return result
+# def extract_title(markdown):
+#     markdown = markdown.strip()
+#     if not markdown.startswith("#"):
+#         raise Exception("There is no title.")  
+#     split_nodes = []
+#     sections = markdown.strip().split("\n")
+#     result = sections[0].replace("#", "").strip()
+#     return result
     # for s in sections:
     #     if s.startswith("#"):
     #         s = s.replace("#", "").strip()
